@@ -1,2 +1,5 @@
 @import "tailwindcss";
 
+/* .aged {
+  filter: grayscale(100%) contrast(150%) brightness(80%) sepia(10%)
+} */

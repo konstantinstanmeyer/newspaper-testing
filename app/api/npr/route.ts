@@ -1,15 +1,7 @@
 import { NextResponse } from "next/server";
 import Parser from "rss-parser";
 import * as cheerio from "cheerio"
-
-type FeedItem = {
-    title: string;
-    description: string;
-    link: string;
-    published: string;
-    author: string;
-    image: string;
-};
+import { FeedItem } from "@/types/types";
 
 // breaking news section
 const RSS_URL = "https://feeds.npr.org/1001/rss.xml"
@@ -22,6 +14,7 @@ function extractFirstImage(htmlContent: string): string {
 }
 
 export async function GET(){
+    console.log("hello");
     try {
         const parser = new Parser();
         const feed = await parser.parseURL(RSS_URL);
@@ -41,9 +34,9 @@ export async function GET(){
         });
 
         // returning the first 10 results from the breaking news section
-        const top10 = data.slice(0, 10);
+        const topTen = data.slice(0, 10);
 
-        return NextResponse.json(top10, { status: 200 });
+        return NextResponse.json(topTen, { status: 200 });
     } catch(e){
         return NextResponse.json(
             { error: "failed to fetch data" },
