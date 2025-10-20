@@ -14,6 +14,7 @@ type FeedItem = {
 // breaking news section
 const RSS_URL = "https://feeds.npr.org/1001/rss.xml"
 
+// hot-fix for image extraction bug **** FIX
 function extractFirstImage(htmlContent: string): string {
     const $ = cheerio.load(htmlContent);
     const imgSrc = $("img").first().attr("src");
