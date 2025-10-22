@@ -6,6 +6,9 @@ import { FeedItem } from "@/types/types";
 // breaking news section
 const RSS_URL = "https://feeds.npr.org/1001/rss.xml"
 
+// the average frequency of an article having an associated image from a likely incorrect random, ai-generated pool of data
+const IMAGE_FREQUENCIES = [0.88, 0.76, 0.60, 0.52, 0.45, 0.40, 0.35, 0.30, 0.28, 0.25];
+
 // hot-fix for image extraction bug **** FIX
 function extractFirstImage(htmlContent: string): string {
     const $ = cheerio.load(htmlContent);
@@ -41,11 +44,18 @@ export async function GET(){
         const parser = new Parser();
         const feed = await parser.parseURL(RSS_URL);
 
-        const data: FeedItem[] = await Promise.all(feed.items.map(async (entry) => {
+        const data: FeedItem[] = await Promise.all(feed.items.map(async (entry, index) => {
             console.log(entry);
             // current functional fields needed for basic synopses
             const contentHtml = (entry["content:encoded"] as string) || entry.content || entry.summary || "";
             const meta = await fetchMetadataFromPage(entry.link || "");
+
+            // determine whether this article should have an image
+            let image: string | undefined = undefined;
+            const probability = IMAGE_FREQUENCIES[index] ?? 0;
+            if (Math.random() < probability) {
+                image = meta?.image || extractFirstImage(contentHtml);
+            }
 
             return {
                 title: entry.title || "N/A",
@@ -53,7 +63,7 @@ export async function GET(){
                 link: entry.link || "N/A",
                 published: entry.pubDate || "N/A",
                 author: entry.creator || entry.author || "N/A",
-                image: meta?.image || extractFirstImage(contentHtml),
+                image,
             };
         }));
 

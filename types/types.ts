@@ -4,5 +4,5 @@ export type FeedItem = {
     link: string;
     published: string;
     author: string;
-    image: string;
+    image: string | undefined;
 };
