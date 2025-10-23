@@ -1,4 +1,4 @@
-import { FeedItem } from "@/types/types";
+import { FeedItem } from "@/lib/types/types";
 
 export default async function Newsfeed(){
     const res = await fetch("http://localhost:3000/api/npr");

@@ -1,4 +1,4 @@
-import { FeedItem } from "@/types/types";
+import { FeedItem } from "@/lib/types/types";
 
 export default function Article(data: FeedItem){
     return (
