@@ -21,6 +21,8 @@ export async function GET(req: NextRequest, {params}: { params: Promise<Params> 
     const count = url.searchParams.get("count") ? Number(url.searchParams.get("count")) : undefined;
     const timespan = url.searchParams.get("timespan") ?? undefined;
 
+    console.log("hello")
+
     const searchBy: GdeltQueryOptions = { 
       ...(country !== undefined && { country: country }),
       ...(theme !== undefined && { theme: theme }),
