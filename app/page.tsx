@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Newsfeed from "./Newsfeed";
+import GDelt from "./GDelt";
 
 export default function Home() {
   return (
     <div>
-      <Newsfeed />
+      <GDelt />
     </div>
   );
 }
