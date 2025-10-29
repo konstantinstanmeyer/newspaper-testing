@@ -18,7 +18,8 @@ function cleanText(str: string) {
 
 export async function getNprArticle({}: Options){
     try {
-        const url = "https://www.npr.org/2025/10/28/nx-s1-5589180/trump-tariffs-senate-vote";
+        // const url = "https://www.npr.org/2025/10/28/nx-s1-5589180/trump-tariffs-senate-vote";
+        const url = "https://www.npr.org/2025/10/29/nx-s1-5585292/word-of-week-neurodivergent";
     
         const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } });
         if (!res.ok) throw new Error(`Failed to fetch NPR page: ${res.status}`);

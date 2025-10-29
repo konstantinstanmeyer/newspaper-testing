@@ -1,12 +1,3 @@
-export type FeedItem = {
-  title: string;
-  description: string;
-  link: string;
-  published: string;
-  author: string;
-  image: string | undefined;
-}
-
 export interface TopStory {
   sourceName: string;
   author: string | null;
@@ -55,4 +46,15 @@ export interface GdeltStory {
   date: string;
   themes: string[];
   tone: number | null;
+}
+
+export interface NPRStory {
+  title: string;
+  date: string;
+  author: string;
+  publication: string;
+  image: string | null;
+  url: string;
+  paragraphCount: number;
+  content: Array<string>;
 }
