@@ -16,7 +16,7 @@ function cleanText(str: string) {
     .trim();
 }
 
-export async function getNprArticles({}: Options){
+export async function getNprArticle({}: Options){
     try {
         const url = "https://www.npr.org/2025/10/28/nx-s1-5589180/trump-tariffs-senate-vote";
     
@@ -26,9 +26,10 @@ export async function getNprArticles({}: Options){
         const html = await res.text();
         const $ = cheerio.load(html);
     
-        const title =$("meta[property='og:title']").attr("content") || $("h1").first().text();
+        const title = $("meta[property='og:title']").attr("content") || $("h1").first().text();
         const publication = "NPR";
-        const date =$("meta[name='date']").attr("content") || $("time").attr("datetime") || "";
+        const date = $("meta[name='date']").attr("content") || $("time").attr("datetime") || "";
+        const image = $("meta[property='og:image']").attr("content") || "";
 
         const authors = Array.from(
           new Set(
@@ -64,12 +65,13 @@ export async function getNprArticles({}: Options){
           date,
           author,
           publication,
+          image,
           url,
           paragraphCount: content.length,
           content,
         };
     
-        console.log(storyData)
+        // console.log(storyData)
     
         return storyData;
       } catch (err: any) {
