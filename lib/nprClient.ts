@@ -77,7 +77,7 @@ export async function getNprArticle({}: Options, articleList: Array<string>){
 
         console.log(storiesList)
         return storiesList;
-      } catch (err: any) {
-        return { error: err.message || "Error fetching or parsing NPR story" }
+      } catch (err) {
+        return { error: (err as Error).message || "Error fetching or parsing NPR story" }
       }
 }

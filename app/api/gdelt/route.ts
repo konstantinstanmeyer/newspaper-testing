@@ -32,8 +32,8 @@ export async function GET(req: NextRequest, {params}: { params: Promise<Params> 
     const stories = await fetchGdeltStories(searchBy);
 
     return NextResponse.json({ stories });
-  } catch (err: any) {
+  } catch (err) {
     console.error("GDELT API error:", err);
-    return NextResponse.json({ error: err.message ?? "Unknown error" }, { status: 500 });
+    return NextResponse.json({ error: (err as Error).message ?? "Unknown error" }, { status: 500 });
   }
 }

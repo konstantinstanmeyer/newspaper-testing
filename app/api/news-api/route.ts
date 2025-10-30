@@ -24,10 +24,10 @@ export async function GET(
     );
 
     return NextResponse.json({ stories })
-  } catch (error: any) {
-    console.error('Error fetching news:', error)
+  } catch (err) {
+    console.error('Error fetching news:', err)
     return NextResponse.json(
-      { error: error.message ?? 'Unknown error' },
+      { error: (err as Error).message ?? 'Unknown error' },
       { status: 500 }
     );
   }

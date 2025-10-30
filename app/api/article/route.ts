@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
         console.log("aosidjhasd")
         console.log(articles)
         return NextResponse.json(articles);
-    } catch (err: any) {
+    } catch (err) {
         return NextResponse.json(
             { error: "bad" },
             { status: 404 }
