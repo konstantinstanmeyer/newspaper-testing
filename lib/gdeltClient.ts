@@ -35,7 +35,7 @@ function buildGdeltDocUrl(options: GdeltQueryOptions): string {
 /**
  * Normalize raw DOC API article list into our story shape
  */
-function normalizeGdeltDocData(raw: any): GdeltStory[] {
+function normalizeGdeltDocData(raw: { articles: Array<GdeltStory>}): GdeltStory[] {
   if (!raw?.articles) {
     return [];
   }
@@ -58,11 +58,9 @@ export async function fetchGdeltStories(
 ): Promise<GdeltStory[]> {
   const url = buildGdeltDocUrl(options);
   const resp = await fetch(url);
-  const test = await resp.json();
-  console.log(test)
   if (!resp.ok) {
     throw new Error(`GDELT DOC API request failed: ${resp.status} ${resp.statusText}`);
   }
-  const data = resp
+  const data = await resp.json()
   return normalizeGdeltDocData(data);
 }
