@@ -1,13 +1,11 @@
-import Newsfeed from "./Newsfeed";
 import GDelt from "./GDelt";
-import Article from "@/components/Article";
+import Articles from "@/app/components/Articles";
 
 export default function Home() {
   console.log('asdf')
   return (
-    <div>
-      <GDelt />
-      <Article />
+    <div className="bg-[#f9f7f1]">
+      <Articles />
     </div>
   );
 }

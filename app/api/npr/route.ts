@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import Parser from "rss-parser";
 import * as cheerio from "cheerio"
-import { FeedItem } from "@/lib/types/types";
 
 // breaking news section
 const RSS_URL = "https://feeds.npr.org/1001/rss.xml"
@@ -44,7 +43,7 @@ export async function GET(){
         const parser = new Parser();
         const feed = await parser.parseURL(RSS_URL);
 
-        const data: FeedItem[] = await Promise.all(feed.items.map(async (entry, index) => {
+        const data: any[] = await Promise.all(feed.items.map(async (entry, index) => {
             // console.log(entry);
             // current functional fields needed for basic synopses
             const contentHtml = (entry["content:encoded"] as string) || entry.content || entry.summary || "";
@@ -69,6 +68,8 @@ export async function GET(){
 
         // returning the first 10 results from the breaking news section
         const topTen = data.slice(0, 10);
+
+        console.log(topTen)
 
         return NextResponse.json(topTen, { status: 200 });
     } catch(e){

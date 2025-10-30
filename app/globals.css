@@ -3,3 +3,11 @@
 /* .aged {
   filter: grayscale(100%) contrast(150%) brightness(80%) sepia(10%)
 } */
+
+.playfair {
+  font-family: var(--font-playfair);
+}
+
+.source {
+  font-family: var(--font-source);
+}
