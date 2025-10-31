@@ -1,5 +1,5 @@
 
-import { GdeltStory, GdeltQueryOptions } from "@/lib/types/types";
+import { GdeltStory, GdeltQueryOptions, GdeltResponse } from "@/lib/types/types";
 
 // DOC API endpoint for article-list / full-text search
 const GDELT_DOC_BASE = "https://api.gdeltproject.org/api/v2/doc/doc";
@@ -39,14 +39,13 @@ function normalizeGdeltDocData(raw: { articles: Array<GdeltStory>}): GdeltStory[
   if (!raw?.articles) {
     return [];
   }
-  return raw.articles.map((a: any) => ({
+  return raw.articles.map((a: GdeltStory) => ({
     title: a.title,
     url: a.url,
-    sourceCountry: a.sourcecountry ?? null,
-    language: a.language ?? null,
-    date: a.seendate ?? a.date ?? "",
-    themes: a.themes ? (a.themes as string).split(";").filter(t => !!t) : [],
-    tone: a.tone ? parseFloat(a.tone) : null,
+    sourcecountry: a.sourcecountry,
+    language: a.language,
+    seendate: a.seendate ?? a.date ?? "",
+    themes: a.themes ? (a.themes).split(";").filter(t => !!t) : [],
   }));
 }
 

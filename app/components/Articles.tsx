@@ -18,18 +18,23 @@ export default async function Articles(){
     }
 
     return (
-        <>
+        <div className="w-full grid grid-cols-5 border-collapse">
             {storiesArray.map((story, articleIndex) => {
-                // const styleA
-                return (<div key={"article-"+ (articleIndex + 1)} className="w-1/4 text-[#2f2f2f] flex flex-col items-center">
+            const isLastColumn = articleIndex === 4;
+            return (
+                <div key={"article-" + (articleIndex + 1)} className={`px-5 ${!isLastColumn ? "border-r-1 border-[#2f2f2f]" : ""}`}>
+                <div className="w-full text-[#2f2f2f] flex flex-col items-center">
                     <p className="playfair text-3xl font-bold uppercase mb-2 text-center">{story.title}</p>
-                    {story?.author ? <p className="playfair font-bold border-t-[1px] border-b-[1px] py-2 border-[#2f2f2f] w-fit">by <span className="uppercase">{story.author}</span></p> : null}
+                    <p className="playfair font-bold border-t-[1px] border-b-[1px] py-1.5 mt-3 border-[#2f2f2f] w-fit mb-4">
+                        by <span className="uppercase">{story?.author ? story.author : story?.publication ? story.publication : "UNKNOWN"}</span>
+                    </p>
                     {story.content.map((paragraph, i) =>
-                        <p className="source text-sm" key={`${i}-storu-paragraph`}>{paragraph}</p>
+                        <p className="source text-sm" key={`${i}-story-paragraph`}>{paragraph}</p>
                     )}
-                </div>)
-            }
-            )}
-        </>
+                </div>
+        </div>
+    )
+  })}
+</div>
     )
 }

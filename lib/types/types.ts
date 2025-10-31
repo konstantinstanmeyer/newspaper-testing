@@ -41,11 +41,11 @@ export interface GdeltQueryOptions {
 export interface GdeltStory {
   title: string;
   url: string;
-  sourceCountry: string | null;
+  sourcecountry: string | null;
   language: string | null;
   date: string;
-  themes: string[];
-  tone: number | null;
+  themes: string;
+  seendate: string;
 }
 
 export interface NPRStory {
@@ -57,4 +57,12 @@ export interface NPRStory {
   url: string;
   paragraphCount: number;
   content: Array<string>;
+}
+
+export interface GdeltResponse {
+  title: string;
+  url: string;
+  sourcecountry: string;
+  language: string;
+
 }
