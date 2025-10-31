@@ -6,14 +6,7 @@ import type { GdeltQueryOptions } from "@/lib/types/types";
 // GET /api/gdelt
 // ex: /api/gdelt?country=US&theme=technology&count=25
 
-type Params = {
-  country: string | undefined,
-  theme: string | undefined,
-  count: number | undefined,
-  timespan: string | undefined
-}
-
-export async function GET(req: NextRequest, {params}: { params: Promise<Params> }) {
+export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const country = url.searchParams.get("country") ?? undefined;
