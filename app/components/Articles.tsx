@@ -5,16 +5,33 @@ const STYLES = [
     ""
 ]
 
+async function fetchArticles(url: string): Promise<NPRStory[]> {
+    try {
+        const res = await fetch(url);
+
+        if (!res.ok) {
+        console.error("Fetch failed with status:", res.status);
+        return [];
+        }
+
+        const data = await res.json();
+
+        if (!Array.isArray(data)) {
+        console.error("API returned invalid data:", data);
+        return [];
+        }
+
+        return data;
+    } catch (err) {
+        console.error("Error fetching NPR articles:", err);
+        return [];
+    }
+}
+
 export default async function Articles(){
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/article`);
-    
-    const storiesArray: Array<NPRStory> = await res.json();
+    const storiesArray = await fetchArticles(`${process.env.NEXT_PUBLIC_BASE_URL}/api/article`);
 
     const IMAGE_FREQUENCIES = [0.88, 0.76, 0.60, 0.52, 0.45, 0.40, 0.35, 0.30, 0.28, 0.25];
-
-    if (!res.ok) {
-        return <p>error</p>
-    }
 
     return (
         <div className="w-full grid grid-cols-5 border-collapse">
