@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getNprArticle } from "@/lib/nprClient";
+import mongoDBConnection from "@/lib/mongodb/connection";
 
 export async function GET(req: NextRequest) {
+    await mongoDBConnection();
+
     const urls = [
         "https://www.npr.org/2025/10/29/nx-s1-5585292/word-of-week-neurodivergent", 
         "https://www.npr.org/sections/goats-and-soda/2025/10/30/g-s1-95543/halloween-trick-or-treat-candy-unicef-heidi-klum",
@@ -13,8 +16,6 @@ export async function GET(req: NextRequest) {
     try {
         const options = {}
         const articles = await getNprArticle(options, urls);
-        console.log("aosidjhasd")
-        console.log(articles)
         return NextResponse.json(articles);
     } catch (err) {
         return NextResponse.json(
