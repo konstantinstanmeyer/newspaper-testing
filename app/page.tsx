@@ -1,10 +1,6 @@
 import Articles from "@/app/components/Articles";
 
 export default async function Home() {
-  const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/api/daily-articles");
-  const data = await res.json();
-
-  console.log(data);
 
   return (
     <div className="bg-[#f9f7f1] text-[#2f2f2f] flex flex-col relative playfair font-black">
