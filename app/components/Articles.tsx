@@ -6,12 +6,11 @@ const STYLES = [
 ]
 
 export default async function Articles(){
-    console.log(":aisudaiushd")
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/article`);
     
     const storiesArray: Array<NPRStory> = await res.json();
 
-    console.log(storiesArray);
+    const IMAGE_FREQUENCIES = [0.88, 0.76, 0.60, 0.52, 0.45, 0.40, 0.35, 0.30, 0.28, 0.25];
 
     if (!res.ok) {
         return <p>error</p>
@@ -21,6 +20,13 @@ export default async function Articles(){
         <div className="w-full grid grid-cols-5 border-collapse">
             {storiesArray.map((story, articleIndex) => {
             const isLastColumn = articleIndex === 4;
+
+            // determine whether this article should have an image
+            let image: string | null = null;
+            const probability = IMAGE_FREQUENCIES[articleIndex] ?? 0;
+            if (Math.random() < probability) {
+                image = story?.image;
+            }
             return (
                 <div key={"article-" + (articleIndex + 1)} className={`px-5 ${!isLastColumn ? "border-r-1 border-[#2f2f2f]" : ""}`}>
                 <div className="w-full text-[#2f2f2f] flex flex-col items-center">

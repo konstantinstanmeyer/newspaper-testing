@@ -1,4 +1,3 @@
-import GDelt from "./GDelt";
 import Articles from "@/app/components/Articles";
 
 export default function Home() {
