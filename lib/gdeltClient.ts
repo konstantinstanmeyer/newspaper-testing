@@ -44,7 +44,7 @@ function normalizeGdeltDocData(raw: { articles: Array<GdeltStory>}): GdeltStory[
     url: a.url,
     sourcecountry: a.sourcecountry,
     language: a.language,
-    seendate: a.seendate ?? a.date ?? "",
+    date: a.seendate ?? a.date ?? "",
     themes: a.themes ? (a.themes).split(";").filter(t => !!t) : [],
   }));
 }
