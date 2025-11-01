@@ -31,7 +31,6 @@ async function fetchArticles(url: string): Promise<NPRStory[]> {
 export default async function Articles(){
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/daily-articles`);
     const storiesArray: NPRStory[] = (await res.json()).articles;
-    console.log(storiesArray)
 
     const IMAGE_FREQUENCIES = [0.88, 0.76, 0.60, 0.52, 0.45, 0.40, 0.35, 0.30, 0.28, 0.25];
 

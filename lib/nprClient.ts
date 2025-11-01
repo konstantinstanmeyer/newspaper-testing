@@ -17,10 +17,10 @@ function cleanText(str: string) {
 }
 
 export async function getNprArticle({}: Options, articleList: Array<string>){
-  const storiesPromises = articleList.map(async (articleURL) => {
+  const storiesPromises = articleList.map(async (url) => {
     try {
       // const url = "https://www.npr.org/2025/10/28/nx-s1-5589180/trump-tariffs-senate-vote";
-      const res = await fetch(articleURL, { headers: { "User-Agent": "Mozilla/5.0" } });
+      const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } });
       if (!res.ok) throw new Error(`Failed to fetch NPR page: ${res.status}`);
   
       const html = await res.text();
@@ -66,12 +66,12 @@ export async function getNprArticle({}: Options, articleList: Array<string>){
         author,
         publication,
         image,
-        articleURL,
+        url,
         paragraphCount: content.length,
         content,
       };
     } catch (err) {
-      console.error(`Error fetching/parsing ${articleURL}:`, err);
+      console.error(`Error fetching/parsing ${url}:`, err);
       return null;
     }
   })  
