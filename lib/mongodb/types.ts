@@ -6,5 +6,5 @@ export interface DailyArticleModel {
     date: string;
     image: string | null;
     content: Array<string>;
-    paragraphCount: Number;
+    paragraphCount: number;
 }
