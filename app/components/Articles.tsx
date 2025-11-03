@@ -22,12 +22,7 @@ async function fetchArticles(): Promise<NPRStory[]> {
 
     const data = await res.json();
 
-    if (!Array.isArray(data?.articles)) {
-      console.warn("API returned invalid data:", data);
-      return [];
-    }
-
-    return data.articles;
+    return data;
   } catch (err) {
     console.error("Failed to fetch NPR articles:", err);
     return [];
