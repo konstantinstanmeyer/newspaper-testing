@@ -11,6 +11,8 @@ function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// add the logic to send text styling constants here, and randomise them along with the images, separately, then append them to each article's object, only on the frontend
+
 
 export async function GET(){
     try {
@@ -46,7 +48,7 @@ export async function GET(){
             article.publication && 
             article.date && 
             Array.isArray(article.content) && article.content.length > 0
-        );
+            );
 
         if (validatedArticles.length > 0) {
             // const savedArticles = [];

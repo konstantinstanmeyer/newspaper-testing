@@ -5,6 +5,7 @@ export interface DailyArticleModel {
     author: string | null;
     date: string;
     image: string | null;
+    imageAlt: string | null;
     content: Array<string>;
     paragraphCount: number;
 }

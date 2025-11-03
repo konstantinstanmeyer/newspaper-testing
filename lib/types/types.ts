@@ -54,6 +54,7 @@ export interface NPRStory {
   author: string;
   publication: string;
   image: string | null;
+  imageAlt: string | null;
   url: string;
   paragraphCount: number;
   content: Array<string>;

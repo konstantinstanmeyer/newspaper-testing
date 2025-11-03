@@ -27,6 +27,10 @@ const DailyArticleSchema = new Schema<DailyArticleModel>(
       type: String,
       required: false,
     },
+    imageAlt: {
+      type: String,
+      required: false,
+    },
     paragraphCount: {
       type: Number,
       required: false,

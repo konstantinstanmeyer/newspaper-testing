@@ -29,7 +29,13 @@ export async function getNprArticle({}: Options, articleList: Array<string>){
       const title = $("meta[property='og:title']").attr("content") || $("h1").first().text();
       const publication = "NPR";
       const date = $("meta[name='date']").attr("content") || $("time").attr("datetime") || "";
-      const image = $("meta[property='og:image']").attr("content") || "";
+      let image = $("meta[property='og:image']").attr("content") || "";
+
+      // check if stock image is being use
+      if (image.includes("https://media.npr.org/include/images/facebook-default")) image = "";
+      const imageAlt = $("meta[property='og:image:alt']").attr("content") || "";
+
+      console.log(imageAlt)
 
       const authors = Array.from(
         new Set(
@@ -69,6 +75,7 @@ export async function getNprArticle({}: Options, articleList: Array<string>){
         url,
         paragraphCount: content.length,
         content,
+        imageAlt
       };
     } catch (err) {
       console.error(`Error fetching/parsing ${url}:`, err);
