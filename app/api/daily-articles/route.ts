@@ -22,9 +22,6 @@ export async function GET(){
         // if we pass both tests then we return the array of valid articles from the day of
         const existingArticles = await DailyArticle.find({});
 
-        console.log("first check")
-        console.log(existingArticles)
-
         // temporary if statement for before the database is populated
         if (existingArticles.length > 0){
             console.log("skipped steps!!")

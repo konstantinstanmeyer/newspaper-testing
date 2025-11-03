@@ -22,7 +22,7 @@ async function fetchArticles(): Promise<NPRStory[]> {
 
     const data = await res.json();
 
-    return data;
+    return data.articles;
   } catch (err) {
     console.error("Failed to fetch NPR articles:", err);
     return [];
@@ -31,7 +31,6 @@ async function fetchArticles(): Promise<NPRStory[]> {
 
 export default async function Articles(){
     const storiesArray = await fetchArticles();
-    console.log(storiesArray);
     let lastImageIndex: number | null = null;
 
     if (!storiesArray.length) {
@@ -59,7 +58,7 @@ export default async function Articles(){
                 adjustedProbability *= spacingFactor; // assignment operator fun!~!
             }
 
-            console.log("adjusted probability: " + adjustedProbability)
+            // console.log("adjusted probability: " + adjustedProbability)
 
             if (Math.random() < adjustedProbability && story?.image !== "") {
                 image = story.image;
