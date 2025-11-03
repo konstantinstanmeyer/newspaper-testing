@@ -10,10 +10,7 @@ const REQUIRED_SPACING = 2;
 
 async function fetchArticles(): Promise<NPRStory[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/daily-articles`, {
-      // ensure this fetch is server-side only
-      cache: "no-store",
-    });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/daily-articles`);
 
     if (!res.ok) {
       console.warn("API returned non-OK status:", res.status);

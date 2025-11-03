@@ -15,10 +15,11 @@ function delay(ms: number) {
 
 
 export async function GET(){
+    await mongoDBConnection();
+    
     try {
         // check the database to see if daily-articles array is length < 0 or the articles are older than 5AM EST (same-day as request)
         // if we pass both tests then we return the array of valid articles from the day of
-        await mongoDBConnection();
         const existingArticles = await DailyArticle.find({});
 
         console.log("first check")
