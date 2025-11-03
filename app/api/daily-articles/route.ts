@@ -35,6 +35,10 @@ export async function GET(){
 
         // this is the testing default for npr stories within the last 24hrs, pooled from a list of 100 articles, all published in the US and in English
         const links = await getGdeltArticles({});
+        if (!links.length) {
+            console.warn("no GDELT links returned");
+            return NextResponse.json({ articles: [] }, { status: 200 });
+        }
 
         // after we have the array of urls, we can pass them into different handlers, of which only the npr.org scraper is fully functional
         // we get the array of formatted stories as a javascript variable, which will then get iterated over on the front-end

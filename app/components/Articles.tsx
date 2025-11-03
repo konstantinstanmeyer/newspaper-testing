@@ -29,9 +29,18 @@ async function fetchArticles(url: string): Promise<NPRStory[]> {
 }
 
 export default async function Articles(){
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/daily-articles`);
-    const data = await res.json();
-    const storiesArray: NPRStory[] = data.articles;
+    let storiesArray: NPRStory[] = []
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/daily-articles`);
+        if (!res.ok){
+            console.log("error: " + res.status)
+        } else {
+            const data = await res.json();
+            storiesArray = data;
+        }
+    } catch(e){
+        console.log("Server side error fetching npr stories. Error: " + (e as Error).message)
+    }
 
     const IMAGE_FREQUENCIES = [0.8, 0.7, 0.55, 0.45, 0.35, 0.30, 0.25, 0.20, 0.15, 0.10];
     let lastImageIndex: number | null = null;
@@ -74,7 +83,7 @@ export default async function Articles(){
                     <p className="playfair font-bold border-t-[1px] border-b-[1px] py-1.5 mt-3 border-[#2f2f2f] w-fit mb-4 text-center">
                         by <span className="uppercase">{story?.author ? story.author : story?.publication ? story.publication : "UNKNOWN"}</span>
                     </p>
-                    {story.content.map((paragraph, i) =>
+                    {story.content?.map((paragraph, i) =>
                         <p className="source text-sm mb-2" key={`${i}-story-paragraph`}>{paragraph}</p>
                     )}
                 </div>
