@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` antialiased ${playfairDisplay.variable} ${sourceSerif.variable}`}
+        className={`min-h-screen antialiased ${playfairDisplay.variable} ${sourceSerif.variable}`}
       >
         {children}
       </body>
