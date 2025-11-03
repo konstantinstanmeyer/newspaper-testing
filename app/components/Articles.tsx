@@ -30,8 +30,8 @@ async function fetchArticles(url: string): Promise<NPRStory[]> {
 
 export default async function Articles(){
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/daily-articles`);
-    const storiesArray: NPRStory[] = (await res.json()).articles;
-    const storiesArrayLength = storiesArray.length;
+    const data = await res.json();
+    const storiesArray: NPRStory[] = data.articles;
 
     const IMAGE_FREQUENCIES = [0.8, 0.7, 0.55, 0.45, 0.35, 0.30, 0.25, 0.20, 0.15, 0.10];
     let lastImageIndex: number | null = null;
