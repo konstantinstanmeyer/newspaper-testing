@@ -62,6 +62,7 @@ export default async function Articles(){
 
             if (Math.random() < adjustedProbability) {
                 image = story.image;
+                lastImageIndex = articleIndex;
             }
             
             return (
