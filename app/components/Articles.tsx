@@ -30,7 +30,8 @@ async function fetchArticles(): Promise<NPRStory[]> {
 }
 
 export default async function Articles(){
-    const storiesArray = await fetchArticles()
+    const storiesArray = await fetchArticles();
+    console.log(storiesArray);
     let lastImageIndex: number | null = null;
 
     if (!storiesArray.length) {
