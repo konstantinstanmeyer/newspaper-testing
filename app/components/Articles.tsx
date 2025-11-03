@@ -5,46 +5,42 @@ const STYLES = [
     ""
 ]
 
-async function fetchArticles(url: string): Promise<NPRStory[]> {
-    try {
-        const res = await fetch(url);
+const IMAGE_FREQUENCIES = [0.8, 0.7, 0.55, 0.45, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1];
+const REQUIRED_SPACING = 2;
 
-        if (!res.ok) {
-        console.error("Fetch failed with status:", res.status);
-        return [];
-        }
+async function fetchArticles(): Promise<NPRStory[]> {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/daily-articles`, {
+      // ensure this fetch is server-side only
+      cache: "no-store",
+    });
 
-        const data = await res.json();
-
-        if (!Array.isArray(data)) {
-        console.error("API returned invalid data:", data);
-        return [];
-        }
-
-        return data;
-    } catch (err) {
-        console.error("Error fetching NPR articles:", err);
-        return [];
+    if (!res.ok) {
+      console.warn("API returned non-OK status:", res.status);
+      return [];
     }
+
+    const data = await res.json();
+
+    if (!Array.isArray(data?.articles)) {
+      console.warn("API returned invalid data:", data);
+      return [];
+    }
+
+    return data.articles;
+  } catch (err) {
+    console.error("Failed to fetch NPR articles:", err);
+    return [];
+  }
 }
 
 export default async function Articles(){
-    let storiesArray: NPRStory[] = []
-    try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/daily-articles`);
-        if (!res.ok){
-            console.log("error: " + res.status)
-        } else {
-            const data = await res.json();
-            storiesArray = data;
-        }
-    } catch(e){
-        console.log("Server side error fetching npr stories. Error: " + (e as Error).message)
-    }
-
-    const IMAGE_FREQUENCIES = [0.8, 0.7, 0.55, 0.45, 0.35, 0.30, 0.25, 0.20, 0.15, 0.10];
+    const storiesArray = await fetchArticles()
     let lastImageIndex: number | null = null;
-    const requiredSpacing = 5; // number of articles to “recover” full probability
+
+    if (!storiesArray.length) {
+        return <p>No articles available at this time.</p>;
+    }
 
     return (
         <div className="w-full grid grid-cols-5 border-collapse gap-y-0">
@@ -63,13 +59,13 @@ export default async function Articles(){
                 // taken from some AI generated BS (likely BS, i will say) so this probability should be studied in practice, or just find a better, factually backed statistic...
                 // this math may need to be double-checked at a later time, as it was taken from a data pool where the article index may have already affected the probability
                 // meaning this math entirely assumes the base probability, but this critique/assumption may not be correct and or may not be causing as large an influence as i assume
-                const spacingFactor = Math.min(distance / requiredSpacing, 1); // tweak requiredSpacing to control frequency
+                const spacingFactor = Math.min(distance / REQUIRED_SPACING, 1); // tweak requiredSpacing to control frequency
                 adjustedProbability *= spacingFactor; // assignment operator fun!~!
             }
 
             console.log("adjusted probability: " + adjustedProbability)
 
-            if (Math.random() < adjustedProbability) {
+            if (Math.random() < adjustedProbability && story?.image !== "") {
                 image = story.image;
                 lastImageIndex = articleIndex;
             }
