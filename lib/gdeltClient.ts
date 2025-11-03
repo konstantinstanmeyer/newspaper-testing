@@ -5,7 +5,7 @@ interface Filters {
 }
 
 const FORMAT_STRING = "mode=artlist&format=json"
-const STANDARD_RESPONSE = "timespan=1d&maxrecords=100"
+const STANDARD_RESPONSE = "timespan=2d&maxrecords=100"
 
 const regexNPR = /^https:\/\/www\.npr\.org\/2025\//;
 
