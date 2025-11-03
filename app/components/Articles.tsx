@@ -38,7 +38,7 @@ export default async function Articles(){
     }
 
     return (
-        <div className="w-full grid grid-cols-5 border-collapse gap-y-0">
+        <div className="w-full flex flex-wrap">
             {storiesArray.map((story, articleIndex) => {
             const isLastColumn = articleIndex === 4;
 
@@ -66,7 +66,7 @@ export default async function Articles(){
             }
             
             return (
-                <div key={"article-" + (articleIndex + 1)} className={`px-5 ${!isLastColumn ? "border-r-1 border-[#2f2f2f]" : ""}`}>
+                <div key={"article-" + (articleIndex + 1)} className={`px-5 justify-start w-1/5 ${!isLastColumn ? " border-r-1 border-[#2f2f2f]" : ""}`}>
                 <div className="w-full !break-words !hyphens-auto text-[#2f2f2f] flex flex-col items-center relative">
                     {image ? <img className="sepia-image mt-4" src={image} /> : null}
                     <p>{story?.imageAlt}</p>
