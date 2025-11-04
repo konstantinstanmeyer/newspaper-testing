@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getNprArticle } from "@/lib/nprClient";
 import mongoDBConnection from "@/lib/mongodb/connection";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     await mongoDBConnection();
 
     const urls = [
@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json(articles);
     } catch (err) {
         return NextResponse.json(
-            { error: "bad" },
+            { error: (err as Error).message },
             { status: 404 }
         )
     }

@@ -4,12 +4,12 @@ import DailyArticle from "@/lib/mongodb/models/DailyArticle";
 import { getNprArticle } from "@/lib/nprClient";
 import { NextResponse } from "next/server";
 
-const DAILY_ARTICLES_GDELT_URL = "domain:npr.org%20AND%20sourcelang:english%20AND%20sourcecountry:US&mode=artlist&format=json&timespan=1d&maxrecords=100"
+// const DAILY_ARTICLES_GDELT_URL = "domain:npr.org%20AND%20sourcelang:english%20AND%20sourcecountry:US&mode=artlist&format=json&timespan=1d&maxrecords=100"
 
-// Optional delay to slow down inserts
-function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+// optional delay to slow down inserts
+// function delay(ms: number) {
+//   return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
 // add the logic to send text styling constants here, and randomise them along with the images, separately, then append them to each article's object, only on the frontend
 
@@ -32,7 +32,7 @@ export async function GET(){
         // first we fetch the array of article urls we'd like to use with gdelt
 
         // this is the testing default for npr stories within the last 24hrs, pooled from a list of 100 articles, all published in the US and in English
-        const links = await getGdeltArticles({});
+        const links = await getGdeltArticles();
         if (!links.length) {
             console.warn("no GDELT links returned");
             return NextResponse.json({ articles: [] }, { status: 200 });
@@ -70,6 +70,6 @@ export async function GET(){
         }
     } catch (err) {
         console.log("error reached")
-        return NextResponse.json({ error: "error"}, { status: 500 })
+        return NextResponse.json({ error: (err as Error).message }, { status: 500 })
     }
 }

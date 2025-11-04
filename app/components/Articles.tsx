@@ -1,9 +1,9 @@
 import { NPRStory } from "@/lib/types/types";
 
-const STYLES = [
-    "bold font-3xl uppercase",
-    ""
-]
+// const STYLES = [
+//     "bold font-3xl uppercase",
+//     ""
+// ]
 
 const IMAGE_FREQUENCIES = [0.8, 0.7, 0.55, 0.45, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1];
 const REQUIRED_SPACING = 2;
@@ -75,7 +75,7 @@ export default async function Articles(){
             return (
                 <div key={"article-" + (articleIndex + 1)} className={`px-5 break-inside-avoid justify-start ${!isLastColumn ? " border-r-1 border-[#2f2f2f]" : ""}`}>
                 <div className="w-full !break-words !hyphens-auto text-[#2f2f2f] flex flex-col items-center relative">
-                    {image ? <img className="sepia-image mt-4" src={image} /> : null}
+                    {image ? <img alt={story.title + "_image"} className="sepia-image mt-4" src={image} /> : null}
                     <p>{story?.imageAlt}</p>
                     <p className="playfair !hyphens-auto text-3xl mt-4 font-bold mb-2 text-center mx-5">{story.title}</p>
                     <p className="playfair font-bold border-t-[1px] border-b-[1px] py-1.5 mt-3 border-[#2f2f2f] w-fit mb-4 text-center">
