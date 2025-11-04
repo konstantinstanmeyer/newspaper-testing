@@ -38,9 +38,16 @@ export default async function Articles(){
     }
 
     return (
-        <div className="w-full flex flex-wrap">
+        <div className="w-full columns-5 gap-5 relative">
+            <div id="overlay" className="absolute top-0 left-0 w-full columns-5 gap-5 h-full justify-center z-20 pointer-events-none">
+                <div className=" border-r-black border-r-[1px] h-full"></div>
+                <div className=" border-r-black border-r-[1px] h-full"></div>
+                <div className=" border-r-black border-r-[1px] h-full"></div>
+                <div className=" border-r-black border-r-[1px] h-full"></div>
+                <div className=" border-r-black border-r-[1px] h-full"></div>
+            </div>
             {storiesArray.map((story, articleIndex) => {
-            const isLastColumn = articleIndex === 4;
+            const isLastColumn = articleIndex % 4 === 0;
 
             // determine whether this article should have an image
             let image: string | null = null;
@@ -66,7 +73,7 @@ export default async function Articles(){
             }
             
             return (
-                <div key={"article-" + (articleIndex + 1)} className={`px-5 justify-start w-1/5 ${!isLastColumn ? " border-r-1 border-[#2f2f2f]" : ""}`}>
+                <div key={"article-" + (articleIndex + 1)} className={`px-5 break-inside-avoid justify-start ${!isLastColumn ? " border-r-1 border-[#2f2f2f]" : ""}`}>
                 <div className="w-full !break-words !hyphens-auto text-[#2f2f2f] flex flex-col items-center relative">
                     {image ? <img className="sepia-image mt-4" src={image} /> : null}
                     <p>{story?.imageAlt}</p>
