@@ -62,7 +62,7 @@ export async function getNprArticle({}: Options, articleList: Array<string>){
           !/getty images/i.test(p) &&            // skip photo credits
           !authors.includes(p)                   // skip author lines
         ) {
-          content.push(p);
+          content.push(p.replace(/\s*:.*/, "")); // remove everything from the first colon onward, "\s*:" skips any possible spaces before the colon as well
         }
       });
       
