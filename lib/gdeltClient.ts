@@ -3,10 +3,10 @@
 // }
 
 const FORMAT_STRING = "mode=artlist&format=json"
-const STANDARD_RESPONSE = "timespan=2d&maxrecords=100"
+const STANDARD_RESPONSE = "timespan=2d&maxrecords=250"
 const STANDARD_ORDER = "sort=DateDesc"
 
-const regexNPR = /^https:\/\/www\.npr\.org\/2025\//;
+const regexNPR = /^https:\/\/www\.npr\.org\/2025\/(?!.*nx-s1)/;
 
 export async function getGdeltArticles(): Promise<Array<string>>{
     // fix this later to not default to npr and instead to default to any publications (not actually any but from our pool of scrapable sites, any)

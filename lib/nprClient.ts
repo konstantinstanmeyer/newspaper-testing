@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio';
+import { NPRStory } from './types/types';
 
 interface Options {
     theme?: string;
@@ -85,4 +86,25 @@ export async function getNprArticle({}: Options, articleList: Array<string>){
 
   const storiesList = (await Promise.all(storiesPromises)).filter(Boolean);
   return storiesList;
+}
+
+export async function fetchArticles(): Promise<NPRStory[]> {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/daily-articles`, {
+      // ensure this fetch is server-side only
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      console.warn("API returned non-OK status:", res.status);
+      return [];
+    }
+
+    const data = await res.json();
+
+    return data.articles;
+  } catch (err) {
+    console.error("Failed to fetch NPR articles:", err);
+    return [];
+  }
 }
