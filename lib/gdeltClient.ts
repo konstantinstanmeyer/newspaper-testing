@@ -4,6 +4,7 @@
 
 const FORMAT_STRING = "mode=artlist&format=json"
 const STANDARD_RESPONSE = "timespan=2d&maxrecords=100"
+const STANDARD_ORDER = "sort=DateDesc"
 
 const regexNPR = /^https:\/\/www\.npr\.org\/2025\//;
 
@@ -13,7 +14,7 @@ export async function getGdeltArticles(): Promise<Array<string>>{
 
     console.log("pre try")
     try {
-        const res = await fetch(process.env.GDELT_BASE_URL + "sourcelang:english%20AND%20sourcecountry:US" + (publication ? `%20AND%20${publication}` : "") + "&" + FORMAT_STRING + "&" + STANDARD_RESPONSE);
+        const res = await fetch(process.env.GDELT_BASE_URL + "sourcelang:english%20AND%20sourcecountry:US" + (publication ? `%20AND%20${publication}` : "") + "&" + FORMAT_STRING + "&" + STANDARD_ORDER + "&" + STANDARD_RESPONSE);
         const data = await res.json();
         const length = data.articles.length;
 

@@ -77,7 +77,7 @@ export default async function Articles(){
                 <div className="w-full !break-words !hyphens-auto text-[#2f2f2f] flex flex-col items-center relative">
                     {image ? <Image priority={true} width={640} height={480} alt={story.title + "_image"} className="sepia-image mt-4" src={image} /> : null}
                     <p>{story?.imageAlt}</p>
-                    <p className="playfair !hyphens-auto text-3xl mt-4 font-bold mb-2 text-center mx-5">{story.title}</p>
+                    <p className="playfair !hyphens-auto text-3xl mt-4 font-bold mb-2 text-center mx-5">{story.title.replace(/\s*:.*/, "")}</p>
                     <p className="playfair font-bold border-t-[1px] border-b-[1px] py-1.5 mt-3 border-[#2f2f2f] w-fit mb-4 text-center">
                         by <span className="uppercase">{story?.author ? story.author : story?.publication ? story.publication : "UNKNOWN"}</span>
                     </p>

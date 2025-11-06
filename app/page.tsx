@@ -3,7 +3,7 @@ import Articles from "@/app/components/Articles";
 export default async function Home() {
 
   return (
-    <div className="bg-[#f9f7f1] text-[#2f2f2f] flex flex-col relative playfair font-black">
+    <div className="bg-[#f9f7f1]  flex flex-col relative playfair font-black worn-text-textured">
       <div className="relative w-full flex justify-center items-center">
         <header className="text-[80px] mx-4 text-center leading-none mb-2">NEWS POST</header>
       </div>

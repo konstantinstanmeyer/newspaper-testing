@@ -17,3 +17,17 @@
   filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
   mix-blend-mode: multiply;
 }
+
+.worn-text-textured {
+  position: relative;
+  color: #555; /* Base text color */
+}
+
+.worn-text-textured::before {
+	position: absolute;
+	left: 0;
+	background: url('/public/grunge.jpg');
+	background-size: cover;
+	color: rgba(255, 255, 255, 0);
+	mix-blend-mode: hard-light;
+}
