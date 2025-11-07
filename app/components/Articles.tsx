@@ -8,7 +8,7 @@ import Layout1 from "./Layout1";
 //     ""
 // ]
 
-const LAYOUTS = [Layout1]
+const LAYOUTS = [Layout0]
 
 export default async function Articles(){
   const storiesArray = await fetchArticles();
