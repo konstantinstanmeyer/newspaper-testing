@@ -1,7 +1,6 @@
 import { fetchArticles } from "@/lib/nprClient";
-import Image from "next/image";
 import Layout0 from "./Layout0";
-import Layout1 from "./Layout1";
+// import Layout1 from "./Layout1";
 
 // const STYLES = [
 //     "bold font-3xl uppercase",

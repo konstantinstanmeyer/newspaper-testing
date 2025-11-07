@@ -1,17 +1,17 @@
 import { NPRStory } from "@/lib/types/types";
-import Image from "next/image";
+// import Image from "next/image";
 
-const IMAGE_FREQUENCIES = [0.8, 0.7, 0.55, 0.45, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1];
+// const IMAGE_FREQUENCIES = [0.8, 0.7, 0.55, 0.45, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1];
 
 // variable that controls how many story indexes must be iterated through before the standard image frequency gets defaulted to (acts as divider for the defaults) 
-const REQUIRED_SPACING = 2;
+// const REQUIRED_SPACING = 2;
 
 interface Props {
     storiesArray: NPRStory[];
 }
 
 export default async function Layout1({storiesArray}: Props){
-    let lastImageIndex: number | null = null;
+    // let lastImageIndex: number | null = null;
 
     const story2 = storiesArray[0]
 
