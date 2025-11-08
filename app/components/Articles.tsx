@@ -1,13 +1,15 @@
 import { fetchArticles } from "@/lib/nprClient";
 import Layout0 from "./Layout0";
-// import Layout1 from "./Layout1";
+import Layout1 from "./Layout1";
 
 // const STYLES = [
 //     "bold font-3xl uppercase",
 //     ""
 // ]
 
-const LAYOUTS = [Layout0]
+const LAYOUTS = [Layout1]
+
+// add a fix for quotations in "centered" text boxes returned by npr.
 
 export default async function Articles(){
   const storiesArray = await fetchArticles();

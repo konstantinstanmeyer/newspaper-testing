@@ -1,4 +1,4 @@
-import { Libre_Caslon_Display, Manufacturing_Consent, Playfair_Display, Source_Serif_4 } from "next/font/google";
+import { Libre_Caslon_Display, Manufacturing_Consent, Playfair_Display, Source_Serif_4, Bodoni_Moda } from "next/font/google";
 
 const playfairDisplay = Playfair_Display({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -28,4 +28,11 @@ const libre = Libre_Caslon_Display({
     variable: "--font-libre"
 })
 
-export const fonts = `${playfairDisplay.variable} ${sourceSerif.variable} ${manufacturing.variable} ${libre.variable}`;
+const bodoni = Bodoni_Moda({
+    weight: ["400", "500", "600", "700", "800", "900"],
+    style: ["normal"],
+    subsets: ["latin"],
+    variable: "--font-bodoni"
+})
+
+export const fonts = `${playfairDisplay.variable} ${sourceSerif.variable} ${manufacturing.variable} ${libre.variable} ${bodoni.variable}`;

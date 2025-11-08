@@ -20,22 +20,27 @@
   font-family: var(--font-libre);
 }
 
+.bodoni {
+  font-family: var(--font-bodoni);
+}
+
 .sepia-image {
   -webkit-filter: sepia(80%) contrast(1) opacity(0.8);
   filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
   mix-blend-mode: multiply;
 }
 
-.worn-text-textured {
-  position: relative;
-  color: #555; /* Base text color */
+.worn-text {
+  color: black; /* This color will be masked */
+  -webkit-mask-image: url('/public/grunge.jpg'); /* For Webkit browsers */
+  mask-image: url('/public/grunge.jpg'); /* Standard syntax */
+  -webkit-mask-size: cover; /* Adjust as needed */
+  mask-size: cover;
 }
 
-.worn-text-textured::before {
-	position: absolute;
-	left: 0;
-	background: url('/public/grunge.jpg');
-	background-size: cover;
-	color: rgba(255, 255, 255, 0);
-	mix-blend-mode: hard-light;
+
+.faded-text {
+  color: rgba(47, 47, 47, 0.8); /* Semi-transparent color for fading */
+  filter: blur(0.01px); /* Slight blur for a worn look */
+  text-shadow: 1px 1px 2px rgba(47, 47, 47, 0.5); /* Subtle shadow for depth */
 }

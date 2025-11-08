@@ -1,4 +1,5 @@
 import { NPRStory } from "@/lib/types/types";
+import Image from "next/image";
 // import Image from "next/image";
 
 // const IMAGE_FREQUENCIES = [0.8, 0.7, 0.55, 0.45, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1];
@@ -18,19 +19,22 @@ export default async function Layout1({storiesArray}: Props){
     return (
         <>
             {/* larger screens */}
-            <div className="flex flex-col w-2/3">
-                <div>
+            <div className="w-full flex flex-row libre tracking-wide mt-8">
+                <div className="flex flex-col justify-start w-1/5">
 
                 </div>
-                <div className="flex flex-col">
-                    <p>{story2.title}</p>
-                    <p>{story2.author}</p>
-                    <p>{story2.publication}</p>
-                    {story2.content.map((string, stringIndex) => 
-                        <p key={stringIndex + "-string"}>{string}</p>
-                    )}
+                <div className="w-3/5 border-l-[1px] border-r-[1px] px-4 justify-start">
+                    <div className="flex flex-col items-center">
+                        <p className="font-bold uppercase bodoni text-5xl text-center w-5/6 mb-2 faded-text">{story2.title}</p>
+                        <Image className="sepia-image w-full" src={story2.image as string} width={960} height={540} alt="first story" />
+                        <p className="">{story2.author}</p>
+                        <p className="">{story2.publication}</p>
+                        {story2.content.map((string, stringIndex) => 
+                            <p className="text-sm" key={stringIndex + "-string"}>{string}</p>
+                        )}
+                    </div>
                 </div>
-                <div>
+                <div className="lex flex-col break-inside-avoid justify-start w-1/5">
 
                 </div>
             </div>
